@@ -1,4 +1,6 @@
 
+<script src="https://sdk.mercadopago.com/js/v2"></script>
+<script src="https://www.mercadopago.com/v2/security.js" view="checkout" output="deviceId"></script>
 <div class="as-search-wrapper" role="main">
     <div class="as-navtuck-wrapper">
         <div class="as-l-fullwidth  as-navtuck" data-events="event52">
@@ -84,7 +86,9 @@
                                     {{ unit }}
                                 </h3>
                             </div>
-                            <button type="submit" class="mercadopago-button" formmethod="post">Pagar</button>
+                            <!--<button type="submit" class="mercadopago-button" formmethod="post">Pagar</button>-->
+                            <div id="wallet_container"></div>
+                            <input type="hidden" id="deviceId">
                         </div>
                     </div>
                 </div>
@@ -92,4 +96,14 @@
         </div>
     </div>
 </div>
+ <script>
+    const mp = new MercadoPago('APP_USR-5c4239f9-0e8a-42ba-8eb1-920b1183d7f7', {
+        locale: "pt-BR",
+    });
+    mp.bricks().create("wallet", "wallet_container", {
+        initialization: {
+            preferenceId: '{{ id }}',
+        },
+    });
+</script>
    
