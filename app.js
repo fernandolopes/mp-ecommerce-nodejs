@@ -113,6 +113,21 @@ app.get('/detail', function (req, res) {
                 quantity: Number.parseInt(query.unit,0)
             }
         ],
+        payer: {
+            name: 'Lalo Landa',
+            surname: 'Lalo',
+            email: 'test_user_33467020@testuser.com',
+            phone: {
+                area_code: '11',
+                number: '12345-6789'
+            },
+            address: {
+                zip_code: '60355000',
+                street_name: 'Rua Falsa',
+                street_number: 123
+            },
+        },
+        external_reference: 'dev_24c65fb163bf11ea96500242ac130004',
         notification_url: notification_url,
         back_urls: {
             success: back_urls,
@@ -120,6 +135,9 @@ app.get('/detail', function (req, res) {
             failure: back_urls,
         },
         payment_methods: {
+            excluded_payment_methods: [
+                "visa"
+            ],
             installments: 6,
             default_installments: 1
         },
