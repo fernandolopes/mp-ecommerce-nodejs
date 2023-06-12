@@ -33,22 +33,40 @@ app.post('/notification', function (req, res){
     try {
         switch(req.query.topic){
             case 'merchant_order':
-                const merchant_order = mercadopago.merchant_orders.findById(req.query.id);
-                console.warn(merchant_order);
+                mercadopago.merchant_orders.findById(req.query.id)
+                    .then(function(merchant_order){
+                        console.warn(merchant_order);
+                        res.json({success: 201});
+                    }).catch(function(error){
+                        console.error(error);
+                        res.json({success: 404});
+                        res.status(404).end();
+                    });
+                
                 break;
             case 'payment':
-                const payment = mercadopago.payment.findById(req.query.id);
-                console.warn(payment);
+                mercadopago.payment.findById(req.query.id)
+                    .then(function(payment){
+                        console.warn(payment);
+                        //console.log("[BODY] "+req.body);
+                        res.json({success: 201});
+                    }).catch(function(error){
+                        console.error(error);
+                        res.json({success: 404});
+                        res.status(404).end();
+                    });
+                
                 break;
             default:
                 console.warn(req.query);
+                res.json({success: 201});
                 break;
         }
     } catch(e) {
+        res.json({success: 404});
+        res.status(404).end();
         console.error(e);
     }
-    console.log(req);
-    res.json({success: 201});
 });
 
 app.get('/detail', function (req, res) {
