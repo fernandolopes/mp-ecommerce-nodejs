@@ -6,7 +6,8 @@ var port = process.env.PORT || 3000;
 const mercadopago = require('mercadopago');
 // Adicione as credenciais
 mercadopago.configure({
-  access_token: 'APP_USR-2453313229452572-092911-2df2d24eb035a4c0852f3455a89d1459-1160953381'
+  access_token: 'APP_USR-2453313229452572-092911-2df2d24eb035a4c0852f3455a89d1459-1160953381',
+  integrator_id: 'dev_24c65fb163bf11ea96500242ac130004'
 });
 
 
@@ -113,9 +114,8 @@ app.get('/detail', function (req, res) {
                 quantity: Number.parseInt(query.unit,0)
             }
         ],
-        integration_id: 'dev_24c65fb163bf11ea96500242ac130004',
         payer: {
-            name: 'Lalo Landa',
+            name: 'APRO Lalo Landa',
             email: 'test_user_33467020@testuser.com',
             phone: {
                 area_code: '11',
