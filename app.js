@@ -30,18 +30,22 @@ app.get('/checkout', function (req, res){
 });
 
 app.post('/notification', function (req, res){
-    console.warn(req.body);
-    res.send("aqui");
-});
-
-app.get('/notification', function (req, res){
-    console.warn(req.body);
-    res.send("aqui");
-});
-
-app.put('/notification', function (req, res){
-    console.warn(req.body);
-    res.send("aqui");
+    switch(req.query.topic){
+        case 'merchant_order':
+            const merchant_order = mercadopago.merchant_orders.findById(req.query.id);
+            console.warn(mercadopago.merchant_order);
+            break;
+        case 'payment':
+            const payment = mercadopago.payment.findById(req.query.id);
+            console.warn(payment);
+            break;
+        default:
+            console.warn(req.query);
+            break;
+    }
+    console.log(req);
+    res.json({success: 201});
+    res.status(201).end();
 });
 
 app.get('/detail', function (req, res) {
@@ -68,6 +72,7 @@ app.get('/detail', function (req, res) {
             installments: 6,
             default_installments: 1
         },
+        auto_return: 'approved',
     };
 
     console.log(preference);
