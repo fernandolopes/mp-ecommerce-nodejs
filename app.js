@@ -119,7 +119,7 @@ app.get('/detail', function (req, res) {
             email: 'test_user_33467020@testuser.com',
             phone: {
                 area_code: '11',
-                number: '12345-6789'
+                number: '123456789'
             },
             address: {
                 zip_code: '60355000',
