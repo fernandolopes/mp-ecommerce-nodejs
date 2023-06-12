@@ -26,19 +26,19 @@ app.get('/', function (req, res) {
 app.get('/checkout', function (req, res){
     console.log(req.query);
 
-    let data = {merchant_order_id: req.query.merchant_order_id};
+    let data = {merchant_order_id: req.query.payment_id, external_reference: req.query.external_reference};
 
     switch(req.query.collection_status) {
         case 'approved':
-            data['collection_status'] = 'Compra Aprovada';
+            data['collection_status'] = 'bem-sucedido';
             data['color'] = '#41e141';
             break;
         case 'pending':
-            data['collection_status'] = 'Aguardando Aprovação';
+            data['collection_status'] = 'pendente';
             data['color'] = '#e1416c';
             break;
         default:
-            data['collection_status'] = 'Compra não aprovada';
+            data['collection_status'] = 'Recusado';
             data['color'] = '#e19141';
             break;
     }
@@ -113,9 +113,9 @@ app.get('/detail', function (req, res) {
                 quantity: Number.parseInt(query.unit,0)
             }
         ],
+        integration_id: 'dev_24c65fb163bf11ea96500242ac130004',
         payer: {
             name: 'Lalo Landa',
-            surname: 'Lalo',
             email: 'test_user_33467020@testuser.com',
             phone: {
                 area_code: '11',
@@ -127,7 +127,7 @@ app.get('/detail', function (req, res) {
                 street_number: 123
             },
         },
-        external_reference: 'dev_24c65fb163bf11ea96500242ac130004',
+        external_reference: 'fernandolopes.s@gmail.com',
         notification_url: notification_url,
         back_urls: {
             success: back_urls,
