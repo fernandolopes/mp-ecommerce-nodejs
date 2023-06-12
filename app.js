@@ -119,7 +119,7 @@ app.get('/detail', function (req, res) {
             email: 'test_user_33467020@testuser.com',
             phone: {
                 area_code: '11',
-                number: '123456789'
+                number: 123456789
             },
             address: {
                 zip_code: '60355000',
@@ -136,7 +136,7 @@ app.get('/detail', function (req, res) {
         },
         payment_methods: {
             excluded_payment_methods: [
-                "visa"
+                {id: "visa"}
             ],
             installments: 6,
             default_installments: 1
