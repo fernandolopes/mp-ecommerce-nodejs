@@ -25,7 +25,37 @@ app.get('/', function (req, res) {
 
 app.get('/checkout', function (req, res){
     console.log(req.query);
-    res.render('checkout', req.query);
+
+    let data = {merchant_order_id: req.query.merchant_order_id};
+
+    switch(req.query.collection_status) {
+        case 'approved':
+            data['collection_status'] = 'Compra Aprovada';
+            data['color'] = '#41e141';
+            break;
+        case 'pending':
+            data['collection_status'] = 'Aguardando Aprovação';
+            data['color'] = '#e1416c';
+            break;
+        default:
+            data['collection_status'] = 'Compra não aprovada';
+            data['color'] = '#e19141';
+            break;
+    }
+
+    switch(req.query.payment_type){
+        case 'credit_card':
+            data['payment_type'] = 'Compra com cartão de crédito';
+            break;
+        case 'debit_card':
+            data['payment_type'] = 'Compra com Cartão de débito';
+            break;
+        default:
+            data['payment_type'] = 'Outro';
+            break;
+    }
+
+    res.render('checkout', data);
           
 });
 
